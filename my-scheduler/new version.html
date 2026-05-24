@@ -1,0 +1,775 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    span.s1 {font: 12.0px 'Apple Color Emoji'}
+    span.s2 {font: 12.0px 'Hiragino Sans'}
+    span.s3 {font: 12.0px 'Lucida Grande'}
+    span.s4 {font: 12.0px 'PingFang SC'}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Personal Productivity Dashboard&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Tailwind CSS CDN --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f8fafc;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.active-tab {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #4f46e5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #4f46e5;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="font-sans text-slate-800"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="min-h-screen flex flex-col"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Header --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;header class="bg-indigo-950 text-white py-6 shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="container mx-auto px-4 flex justify-between items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h1 class="text-2xl font-bold tracking-tight"&gt;Personal Productivity Workspace&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-indigo-200 text-sm"&gt;Organize your daily schedule, map your week, and evaluate your focus&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="hidden sm:block"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="text-xs bg-indigo-900 text-indigo-200 px-3 py-1 rounded-full border border-indigo-700"&gt;Offline-First storage&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Navigation Tabs --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="container mx-auto px-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;nav class="flex space-x-8" aria-label="Tabs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="switchTab('daily')" id="tab-daily" class="py-4 px-1 border-b-2 border-indigo-600 font-semibold text-sm text-indigo-600 focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span><span class="s1">📅</span> Daily Scheduler</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="switchTab('weekly')" id="tab-weekly" class="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-slate-500 hover:text-slate-800 focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span><span class="s1">🗓️</span> Weekly Planner</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="switchTab('efficiency')" id="tab-efficiency" class="py-4 px-1 border-b-2 border-transparent font-medium text-sm text-slate-500 hover:text-slate-800 focus:outline-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span><span class="s1">📈</span> Focus &amp; Efficiency Tracker</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/nav&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Main Workspace --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;main class="flex-grow container mx-auto px-4 py-8 max-w-7xl"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- ================= DAILY SCHEDULER TAB ================= --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="view-daily" class="tab-view block"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 lg:grid-cols-12 gap-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Setup Column (5 cols) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="lg:col-span-5 space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h2 class="text-lg font-semibold text-slate-900 mb-4 flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="mr-2"&gt;<span class="s1">⚙️</span>&lt;/span&gt; Settings</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="grid grid-cols-2 gap-4 mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="block text-xs font-medium text-slate-500 mb-1"&gt;Start Time&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input type="time" id="startTime" value="09:00" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="block text-xs font-medium text-slate-500 mb-1"&gt;End Time&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input type="time" id="endTime" value="17:00" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="grid grid-cols-2 gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="block text-xs font-medium text-slate-500 mb-1"&gt;Break (mins)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input type="number" id="breakDuration" value="10" min="0" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="block text-xs font-medium text-slate-500 mb-1"&gt;Working Style&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;select id="workStyle" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value="frog"&gt;Eat the Frog (High Priority First)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value="quick"&gt;Quick Wins (Shortest First)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;option value="balanced"&gt;Standard (Sorted Priority)&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Add Task Form --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h2 class="text-lg font-semibold text-slate-900 mb-4 flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="mr-2"&gt;<span class="s1">✍️</span>&lt;/span&gt; Add Daily Task</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;form id="taskForm" onsubmit="addDailyTask(event)" class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="block text-xs font-medium text-slate-500 mb-1"&gt;Task Name&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input type="text" id="taskName" required placeholder="e.g., Coding practice" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="grid grid-cols-2 gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;label class="block text-xs font-medium text-slate-500 mb-1"&gt;Duration (mins)&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;input type="number" id="taskDuration" required min="5" placeholder="60" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;label class="block text-xs font-medium text-slate-500 mb-1"&gt;Priority&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;select id="taskPriority" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;option value="high"&gt;<span class="s1">🔥</span> High&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;option value="medium"&gt;<span class="s1">⚡</span> Medium&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                            </span>&lt;option value="low"&gt;<span class="s1">🌱</span> Low&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg font-medium text-sm transition shadow-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>Add Task</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/form&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Daily Tasks Queue --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex justify-between items-center mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h2 class="text-base font-semibold text-slate-900"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>Daily Queue (&lt;span id="taskCount"&gt;0&lt;/span&gt;)</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button onclick="clearDailyTasks()" class="text-xs text-red-500 hover:text-red-700"&gt;Clear All&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="taskList" class="space-y-2 max-h-60 overflow-y-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-slate-400 text-center py-4"&gt;Add tasks to form your daily plan.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Daily Plan Display (7 cols) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="lg:col-span-7 flex flex-col space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex-grow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-4 mb-6 gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h2 class="text-xl font-bold text-slate-900"&gt;Your Sorted Day Plan&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-slate-500 text-xs"&gt;Generated based on tasks and priority levels&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button onclick="generateDailySchedule()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm py-2.5 px-5 rounded-lg transition shadow-sm self-start sm:self-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>Generate Plan <span class="s1">⚡</span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="scheduleTimeline" class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="text-center py-12 text-slate-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-3xl mb-2"&gt;<span class="s1">📅</span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-sm"&gt;Click "Generate Plan" above to process your queue.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="scheduleSummary" class="mt-8 pt-4 border-t border-slate-100 hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="grid grid-cols-3 gap-4 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div class="bg-slate-50 p-3 rounded-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;p class="text-xs text-slate-400 uppercase font-semibold"&gt;Working Time&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;p id="totalWorkTime" class="text-base font-bold text-slate-700"&gt;0 mins&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div class="bg-slate-550 bg-slate-50 p-3 rounded-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;p class="text-xs text-slate-400 uppercase font-semibold"&gt;Total Breaks&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;p id="totalBreakTime" class="text-base font-bold text-slate-700"&gt;0 mins&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div class="bg-slate-550 bg-slate-50 p-3 rounded-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;p class="text-xs text-slate-400 uppercase font-semibold"&gt;Final Time&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;p id="actualEndTime" class="text-base font-bold text-slate-700"&gt;--:--&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- ================= WEEKLY PLANNER TAB ================= --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="view-weekly" class="tab-view hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h2 class="text-xl font-bold text-slate-900"&gt;Weekly Target Planner&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-500 text-sm"&gt;Assign weekly objectives and view progress across the week&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;form id="weeklyForm" onsubmit="addWeeklyTask(event)" class="flex flex-wrap gap-2 items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;select id="weeklyDaySelect" class="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="Monday"&gt;Monday&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="Tuesday"&gt;Tuesday&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="Wednesday"&gt;Wednesday&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="Thursday"&gt;Thursday&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="Friday"&gt;Friday&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="Saturday"&gt;Saturday&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;option value="Sunday"&gt;Sunday&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="text" id="weeklyTaskName" required placeholder="Add weekly goal..." class="px-3 py-2 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 min-w-[200px]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>Add</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/form&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Weekly Grid --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-1 md:grid-cols-7 gap-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Monday --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-50 rounded-lg p-3 border border-slate-200 flex flex-col min-h-[300px]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="font-bold text-slate-700 border-b border-slate-200 pb-2 mb-2 text-sm text-center"&gt;Monday&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="weekly-Monday" class="space-y-2 flex-grow"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Tuesday --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-50 rounded-lg p-3 border border-slate-200 flex flex-col min-h-[300px]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="font-bold text-slate-700 border-b border-slate-200 pb-2 mb-2 text-sm text-center"&gt;Tuesday&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="weekly-Tuesday" class="space-y-2 flex-grow"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Wednesday --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-50 rounded-lg p-3 border border-slate-200 flex flex-col min-h-[300px]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="font-bold text-slate-700 border-b border-slate-200 pb-2 mb-2 text-sm text-center"&gt;Wednesday&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="weekly-Wednesday" class="space-y-2 flex-grow"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Thursday --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-50 rounded-lg p-3 border border-slate-200 flex flex-col min-h-[300px]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="font-bold text-slate-700 border-b border-slate-200 pb-2 mb-2 text-sm text-center"&gt;Thursday&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="weekly-Thursday" class="space-y-2 flex-grow"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Friday --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-50 rounded-lg p-3 border border-slate-200 flex flex-col min-h-[300px]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="font-bold text-slate-700 border-b border-slate-200 pb-2 mb-2 text-sm text-center"&gt;Friday&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="weekly-Friday" class="space-y-2 flex-grow"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Saturday --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-50 rounded-lg p-3 border border-slate-200 flex flex-col min-h-[300px]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="font-bold text-slate-700 border-b border-slate-200 pb-2 mb-2 text-sm text-center bg-indigo-50/50 rounded"&gt;Saturday&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="weekly-Saturday" class="space-y-2 flex-grow"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Sunday --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-slate-50 rounded-lg p-3 border border-slate-200 flex flex-col min-h-[300px]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="font-bold text-slate-700 border-b border-slate-200 pb-2 mb-2 text-sm text-center bg-indigo-50/50 rounded"&gt;Sunday&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="weekly-Sunday" class="space-y-2 flex-grow"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- ================= EFFICIENCY TRACKER TAB ================= --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;section id="view-efficiency" class="tab-view hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 lg:grid-cols-12 gap-8"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Tracker Inputs (4 cols) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="lg:col-span-4 space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="mr-2"&gt;<span class="s1">📝</span>&lt;/span&gt; Log Focus Rating</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;form id="efficiencyForm" onsubmit="saveEfficiencyLog(event)" class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="block text-xs font-medium text-slate-500 mb-1"&gt;Target Date&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;input type="date" id="efficiencyDate" required class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                                </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="block text-xs font-medium text-slate-500 mb-1"&gt;Efficiency Level&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div class="flex items-center space-x-2 mt-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;input type="range" id="efficiencyScore" min="1" max="5" value="3" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span id="scoreDisplay" class="font-bold text-indigo-600 w-8 text-center text-lg"&gt;3&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;div class="flex justify-between text-[10px] text-slate-400 px-1 mt-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span&gt;1 (Low Focus)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;span&gt;5 (High Flow)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;label class="block text-xs font-medium text-slate-500 mb-1"&gt;Learning Session Note&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;textarea id="efficiencyNote" placeholder="e.g., Practiced JavaScript recursion. High focus in first block." rows="3" class="w-full px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg font-medium text-sm transition shadow-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>Save Entry</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/form&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Calendar Color Legend --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 text-xs text-slate-500 space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="font-medium text-slate-700"&gt;Efficiency Color Levels&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center space-x-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="w-4 h-4 bg-slate-100 rounded border border-slate-200 inline-block"&gt;&lt;/span&gt; &lt;span&gt;Unlogged&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="w-4 h-4 bg-indigo-100 rounded inline-block"&gt;&lt;/span&gt; &lt;span&gt;1 (Very Low)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="w-4 h-4 bg-indigo-200 rounded inline-block"&gt;&lt;/span&gt; &lt;span&gt;2&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="w-4 h-4 bg-indigo-300 rounded inline-block"&gt;&lt;/span&gt; &lt;span&gt;3 (Balanced)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="w-4 h-4 bg-indigo-500 rounded inline-block"&gt;&lt;/span&gt; &lt;span&gt;4&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="w-4 h-4 bg-indigo-700 rounded inline-block"&gt;&lt;/span&gt; &lt;span&gt;5 (Peak Flow)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Interactive Calendar Grid (8 cols) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="lg:col-span-8 space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;!-- Calendar Controls --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center justify-between mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h2 class="text-xl font-bold text-slate-900"&gt;Learning Efficiency Heatmap&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-slate-500 text-xs"&gt;A visual map of daily focus levels&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex items-center space-x-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;button onclick="changeMonth(-1)" class="p-2 border border-slate-200 hover:bg-slate-50 rounded-lg text-sm"&gt;<span class="s2">◀</span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span id="calendarTitle" class="font-semibold text-slate-800 text-sm min-w-[100px] text-center"&gt;May 2026&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;button onclick="changeMonth(1)" class="p-2 border border-slate-200 hover:bg-slate-50 rounded-lg text-sm"&gt;<span class="s3">▶</span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;!-- Calendar Rendering --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="grid grid-cols-7 gap-2 text-center text-xs font-medium text-slate-400 mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div&gt;Mon&lt;/div&gt;&lt;div&gt;Tue&lt;/div&gt;&lt;div&gt;Wed&lt;/div&gt;&lt;div&gt;Thu&lt;/div&gt;&lt;div&gt;Fri&lt;/div&gt;&lt;div&gt;Sat&lt;/div&gt;&lt;div&gt;Sun&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="calendarGrid" class="grid grid-cols-7 gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;!-- Days injected here --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Historic Logs Trend list --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-base font-bold text-slate-900 mb-4"&gt;Focus Logs &amp; Journal Notes&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div id="efficiencyLogsList" class="space-y-3 max-h-60 overflow-y-auto pr-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;!-- Saved records list --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-sm text-slate-400 text-center py-4"&gt;No logged statistics yet. Rate a day using the form to populate.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Footer --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;footer class="bg-slate-100 border-t border-slate-200 py-4 text-center text-xs text-slate-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Local Web App • Built with HTML, CSS, &amp; Vanilla JavaScript. All data is saved directly to your browser's memory.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/footer&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Application Script --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- DATA PERSISTENCE &amp; STATE ---</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let dailyTasks = JSON.parse(localStorage.getItem('dailyTasks')) || [];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let weeklyTasks = JSON.parse(localStorage.getItem('weeklyTasks')) || {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'Monday': [], 'Tuesday': [], 'Wednesday': [], 'Thursday': [], 'Friday': [], 'Saturday': [], 'Sunday': []</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let efficiencyLogs = JSON.parse(localStorage.getItem('efficiencyLogs')) || {};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentViewDate = new Date(); // Tracks calendar month view</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Ensure defaults upon initial run</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener('DOMContentLoaded', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Set current date in the log form</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const today = new Date().toISOString().split('T')[0];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('efficiencyDate').value = today;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Setup input change displays</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const scoreInput = document.getElementById('efficiencyScore');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const scoreDisplay = document.getElementById('scoreDisplay');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>scoreInput.addEventListener('input', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>scoreDisplay.textContent = e.target.value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Initial view loads</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderDailyTasks();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderWeeklyPlan();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderCalendar();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderEfficiencyLogList();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Tab Navigation</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function switchTab(tabId) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.tab-view').forEach(view =&gt; view.classList.add('hidden'));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById(`view-${tabId}`).classList.remove('hidden');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Reset tab colors</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const tabs = ['daily', 'weekly', 'efficiency'];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>tabs.forEach(t =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const el = document.getElementById(`tab-${t}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>el.className = "py-4 px-1 border-b-2 border-transparent font-medium text-sm text-slate-500 hover:text-slate-800 focus:outline-none";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Set active class</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const activeEl = document.getElementById(`tab-${tabId}`);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>activeEl.className = "py-4 px-1 border-b-2 border-indigo-600 font-semibold text-sm text-indigo-600 focus:outline-none";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// ================= DAILY SCHEDULER CONTROLLER =================</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function addDailyTask(event) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>event.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const name = document.getElementById('taskName').value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const duration = parseInt(document.getElementById('taskDuration').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const priority = document.getElementById('taskPriority').value;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const newTask = { id: Date.now(), name, duration, priority };</p>
+<p class="p1"><span class="Apple-converted-space">            </span>dailyTasks.push(newTask);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem('dailyTasks', JSON.stringify(dailyTasks));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('taskForm').reset();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('taskPriority').value = 'high';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderDailyTasks();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function deleteDailyTask(id) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>dailyTasks = dailyTasks.filter(t =&gt; t.id !== id);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem('dailyTasks', JSON.stringify(dailyTasks));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderDailyTasks();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function clearDailyTasks() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>dailyTasks = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>localStorage.removeItem('dailyTasks');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderDailyTasks();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('scheduleTimeline').innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-center py-12 text-slate-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-3xl mb-2"&gt;<span class="s1">📅</span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm"&gt;Click "Generate Plan" above to process your queue.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('scheduleSummary').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderDailyTasks() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const listEl = document.getElementById('taskList');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const countEl = document.getElementById('taskCount');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>countEl.textContent = dailyTasks.length;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (dailyTasks.length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>listEl.innerHTML = `&lt;p class="text-sm text-slate-400 text-center py-4"&gt;Add tasks to form your daily plan.&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>listEl.innerHTML = dailyTasks.map(task =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let priorityBadge = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (task.priority === 'high') priorityBadge = '&lt;span class="text-[10px] px-2 py-0.5 rounded bg-red-100 text-red-700 font-medium"&gt;High&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (task.priority === 'medium') priorityBadge = '&lt;span class="text-[10px] px-2 py-0.5 rounded bg-yellow-100 text-yellow-700 font-medium"&gt;Medium&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (task.priority === 'low') priorityBadge = '&lt;span class="text-[10px] px-2 py-0.5 rounded bg-green-100 text-green-700 font-medium"&gt;Low&lt;/span&gt;';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>return `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-grow pr-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="font-medium text-slate-800"&gt;${task.name}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center space-x-2 mt-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs text-slate-500"&gt;<span class="s1">⏱️</span> ${task.duration}m&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>${priorityBadge}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button onclick="deleteDailyTask(${task.id})" class="text-slate-400 hover:text-red-500 p-1"&gt;<span class="s1">🗑️</span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}).join('');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function timeToMinutes(timeStr) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const [hours, mins] = timeStr.split(':').map(Number);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return hours * 60 + mins;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function minutesToTime(minutes) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const hours = Math.floor(minutes / 60) % 24;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const mins = minutes % 60;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function generateDailySchedule() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (dailyTasks.length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>alert("Please add tasks to generate a schedule plan.");</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const startTimeVal = document.getElementById('startTime').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const endTimeVal = document.getElementById('endTime').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const breakDuration = parseInt(document.getElementById('breakDuration').value) || 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const style = document.getElementById('workStyle').value;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let currentMinutes = timeToMinutes(startTimeVal);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const limitMinutes = timeToMinutes(endTimeVal);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let sortedTasks = [...dailyTasks];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (style === 'frog') {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const priorityWeight = { high: 3, medium: 2, low: 1 };</p>
+<p class="p1"><span class="Apple-converted-space">                </span>sortedTasks.sort((a, b) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (priorityWeight[b.priority] !== priorityWeight[a.priority]) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>return priorityWeight[b.priority] - priorityWeight[a.priority];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return b.duration - a.duration;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (style === 'quick') {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>sortedTasks.sort((a, b) =&gt; a.duration - b.duration);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const priorityWeight = { high: 3, medium: 2, low: 1 };</p>
+<p class="p1"><span class="Apple-converted-space">                </span>sortedTasks.sort((a, b) =&gt; priorityWeight[b.priority] - priorityWeight[a.priority]);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let timelineHtml = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let totalWork = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let totalBreak = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let finalTime = currentMinutes;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; sortedTasks.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const task = sortedTasks[i];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const taskStart = currentMinutes;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const taskEnd = currentMinutes + task.duration;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const isOverflowing = taskEnd &gt; limitMinutes;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>let priorityBorder = 'border-l-4 border-l-slate-400';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (task.priority === 'high') priorityBorder = 'border-l-4 border-l-red-500';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (task.priority === 'medium') priorityBorder = 'border-l-4 border-l-yellow-500';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (task.priority === 'low') priorityBorder = 'border-l-4 border-l-green-500';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>timelineHtml += `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="p-4 bg-white rounded-lg border border-slate-200 shadow-xs ${priorityBorder} ${isOverflowing ? 'bg-red-50/40 border-red-200' : ''}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-start mb-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs font-semibold text-indigo-600"&gt;${minutesToTime(taskStart)} - ${minutesToTime(taskEnd)}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs font-medium text-slate-400"&gt;${task.duration} mins&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-medium text-slate-900 text-sm"&gt;${task.name}&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>${isOverflowing ? `&lt;p class="text-red-500 text-[10px] font-medium mt-1"&gt;<span class="s1">⚠️</span> Out of schedule boundary&lt;/p&gt;` : ''}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>totalWork += task.duration;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>currentMinutes = taskEnd;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>finalTime = currentMinutes;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (i &lt; sortedTasks.length - 1 &amp;&amp; breakDuration &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const breakStart = currentMinutes;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const breakEnd = currentMinutes + breakDuration;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const isBreakOverflowing = breakEnd &gt; limitMinutes;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>timelineHtml += `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-center space-x-4 px-4 py-1.5 border-l-4 border-l-sky-300 bg-sky-50/50 rounded-lg text-xs ${isBreakOverflowing ? 'opacity-70' : ''}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="font-semibold text-sky-700"&gt;${minutesToTime(breakStart)} - ${minutesToTime(breakEnd)}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-slate-600 font-medium"&gt;<span class="s1">☕</span> Short Break (${breakDuration} mins)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>totalBreak += breakDuration;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>currentMinutes = breakEnd;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>finalTime = currentMinutes;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('scheduleTimeline').innerHTML = timelineHtml;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('totalWorkTime').textContent = `${totalWork}m`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('totalBreakTime').textContent = `${totalBreak}m`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('actualEndTime').textContent = minutesToTime(finalTime);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (finalTime &gt; limitMinutes) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('actualEndTime').className = "text-base font-bold text-red-500";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('actualEndTime').className = "text-base font-bold text-emerald-600";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('scheduleSummary').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// ================= WEEKLY PLANNER CONTROLLER =================</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function addWeeklyTask(event) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>event.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const day = document.getElementById('weeklyDaySelect').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const taskText = document.getElementById('weeklyTaskName').value.trim();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!weeklyTasks[day]) weeklyTasks[day] = [];</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const newTask = { id: Date.now(), text: taskText, completed: false };</p>
+<p class="p1"><span class="Apple-converted-space">            </span>weeklyTasks[day].push(newTask);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem('weeklyTasks', JSON.stringify(weeklyTasks));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('weeklyTaskName').value = '';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderWeeklyPlan();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function deleteWeeklyTask(day, id) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>weeklyTasks[day] = weeklyTasks[day].filter(t =&gt; t.id !== id);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem('weeklyTasks', JSON.stringify(weeklyTasks));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderWeeklyPlan();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function toggleWeeklyTask(day, id) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const task = weeklyTasks[day].find(t =&gt; t.id === id);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (task) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>task.completed = !task.completed;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>localStorage.setItem('weeklyTasks', JSON.stringify(weeklyTasks));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>renderWeeklyPlan();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderWeeklyPlan() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>days.forEach(day =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const colEl = document.getElementById(`weekly-${day}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!colEl) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const dayTasks = weeklyTasks[day] || [];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (dayTasks.length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>colEl.innerHTML = `&lt;p class="text-[10px] text-slate-300 italic text-center py-4"&gt;Blank&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>colEl.innerHTML = dayTasks.map(t =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-start justify-between p-2 bg-white border border-slate-200 rounded shadow-xs text-xs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-start space-x-1.5 flex-grow pr-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;input type="checkbox" ${t.completed ? 'checked' : ''} onclick="toggleWeeklyTask('${day}', ${t.id})" class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="${t.completed ? 'line-through text-slate-400' : 'text-slate-700'} font-medium break-all leading-tight"&gt;${t.text}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;button onclick="deleteWeeklyTask('${day}', ${t.id})" class="text-slate-300 hover:text-red-500 font-bold ml-1"&gt;×&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}).join('');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// ================= TRACKER &amp; HEATMAP CONTROLLER =================</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function saveEfficiencyLog(event) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>event.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const date = document.getElementById('efficiencyDate').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const score = parseInt(document.getElementById('efficiencyScore').value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const note = document.getElementById('efficiencyNote').value.trim();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>efficiencyLogs[date] = { score, note };</p>
+<p class="p1"><span class="Apple-converted-space">            </span>localStorage.setItem('efficiencyLogs', JSON.stringify(efficiencyLogs));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('efficiencyNote').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('efficiencyScore').value = 3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('scoreDisplay').textContent = 3;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderCalendar();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderEfficiencyLogList();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function deleteEfficiencyLog(date) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (confirm(`Do you want to delete the log for ${date}?`)) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>delete efficiencyLogs[date];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>localStorage.setItem('efficiencyLogs', JSON.stringify(efficiencyLogs));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>renderCalendar();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>renderEfficiencyLogList();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function changeMonth(direction) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentViewDate.setMonth(currentViewDate.getMonth() + direction);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderCalendar();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function selectDateToLog(dateStr) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('efficiencyDate').value = dateStr;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const existing = efficiencyLogs[dateStr];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (existing) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('efficiencyScore').value = existing.score;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('scoreDisplay').textContent = existing.score;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('efficiencyNote').value = existing.note;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('efficiencyScore').value = 3;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('scoreDisplay').textContent = 3;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('efficiencyNote').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderCalendar() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const gridEl = document.getElementById('calendarGrid');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const titleEl = document.getElementById('calendarTitle');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const year = currentViewDate.getFullYear();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const month = currentViewDate.getMonth();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>titleEl.textContent = `${months[month]} ${year}`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Helper formulas for calendar month structure</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const firstDayOfMonth = new Date(year, month, 1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let firstDayIndex = firstDayOfMonth.getDay(); // 0 = Sun, 1 = Mon ...</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let startBlankDays = firstDayIndex === 0 ? 6 : firstDayIndex - 1; // Align Mon as index 0</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const totalDays = new Date(year, month + 1, 0).getDate();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let cellsHtml = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Blank spacer cells</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 0; i &lt; startBlankDays; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cellsHtml += `&lt;div class="aspect-square bg-slate-50 border border-slate-100/50 rounded-lg"&gt;&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Calendar active date loops</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let d = 1; d &lt;= totalDays; d++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const logged = efficiencyLogs[dateStr];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>let colorClass = 'bg-slate-100 hover:bg-slate-200 text-slate-700';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (logged) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (logged.score === 1) colorClass = 'bg-indigo-100 text-indigo-700 border border-indigo-200 font-bold';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (logged.score === 2) colorClass = 'bg-indigo-200 text-indigo-800 border border-indigo-300 font-bold';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (logged.score === 3) colorClass = 'bg-indigo-300 text-indigo-900 border border-indigo-400 font-bold';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (logged.score === 4) colorClass = 'bg-indigo-500 text-white font-bold';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (logged.score === 5) colorClass = 'bg-indigo-700 text-white font-bold';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Check if current cell date is today</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const todayStr = new Date().toISOString().split('T')[0];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const isToday = dateStr === todayStr;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const ringClass = isToday ? 'ring-2 ring-emerald-500 ring-offset-1' : '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>cellsHtml += `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button onclick="selectDateToLog('${dateStr}')"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>class="aspect-square p-1 rounded-lg text-xs flex flex-col justify-between items-center transition relative group ${colorClass} ${ringClass}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span&gt;${d}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>${logged ? `&lt;span class="text-[9px] scale-75"&gt;<span class="s4">★</span>${logged.score}&lt;/span&gt;` : ''}</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Tooltip on hover --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>${logged ? `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="absolute z-10 hidden group-hover:block bg-slate-900 text-white text-[10px] p-2 rounded shadow-lg -top-12 left-1/2 transform -translate-x-1/2 w-32 font-normal leading-normal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Score: ${logged.score}/5&lt;br&gt;${logged.note ? logged.note.substring(0,25)+'...' : 'No notes'}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/span&gt;` : ''}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>gridEl.innerHTML = cellsHtml;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderEfficiencyLogList() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const listEl = document.getElementById('efficiencyLogsList');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const sortedDates = Object.keys(efficiencyLogs).sort((a,b) =&gt; new Date(b) - new Date(a));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (sortedDates.length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>listEl.innerHTML = `&lt;p class="text-sm text-slate-400 text-center py-4"&gt;No logged statistics yet. Rate a day using the form to populate.&lt;/p&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>listEl.innerHTML = sortedDates.map(date =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const log = efficiencyLogs[date];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let stars = '<span class="s1">⭐</span>'.repeat(log.score);</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>return `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs flex justify-between items-start"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center space-x-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="font-bold text-slate-700"&gt;${date}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-amber-500"&gt;${stars}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-600 leading-normal"&gt;${log.note || '&lt;span class="italic text-slate-400"&gt;No notes written&lt;/span&gt;'}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button onclick="deleteEfficiencyLog('${date}')" class="text-slate-300 hover:text-red-500 font-bold px-1 text-sm"&gt;×&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}).join('');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
